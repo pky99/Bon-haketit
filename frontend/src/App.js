@@ -18,7 +18,7 @@ function App() {
                 <Link className="nav-link" to={"/sign-in"}>Login</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
+                <Link className="nav-link" to={{ pathname: "http://localhost:8000/logout" }} target="_blank" >Sign up</Link>
               </li>
             </ul>
           </div>
