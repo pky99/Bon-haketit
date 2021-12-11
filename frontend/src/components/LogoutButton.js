@@ -1,15 +1,20 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import Dashboard from "./Dashboard";
+// LogoutButton.js
+import { useAuth0 } from '@auth0/auth0-react'
+import React from 'react'
+import '../App.css'
 
-const LogoutButton = () => {
-  const { logout } = useAuth0();
+function Logout(props) {
+    const { logout } = useAuth0()
+    return (
+        <div>
+            <button 
+                onClick={()=>logout()} 
+                className="loginButton"
+                >
+                Logout
+                </button>
+        </div>
+    )
+}
 
-  return (
-    <button onClick={() => logout({ returnTo: window.location.origin/Dashboard })}>
-      Log Out
-    </button>
-  );
-};
-
-export default LogoutButton;
+export default Logout

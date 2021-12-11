@@ -5,8 +5,6 @@ import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import FinalStep from "./FinalStep";
-import Login from "./login.component";
-import SignUp from "./signup.component";
 function Dashboard () {
   return (
     <Router>
