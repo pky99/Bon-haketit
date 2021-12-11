@@ -2,7 +2,6 @@ import React from "react";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Steps, Step } from "react-step-builder";
 import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import FinalStep from "./FinalStep";
