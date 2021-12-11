@@ -11,7 +11,7 @@ import json
 def index(request):
     user = request.user
     if user.is_authenticated:
-        return redirect('http://localhost:3000/')
+        return render(request, 'dashboard.html')
     else:
         return render(request, 'index.html')
 
