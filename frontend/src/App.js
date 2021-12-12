@@ -5,6 +5,7 @@ import LogoutButton from './components/LogoutButton';
 import Dashboard from './components/Dashboard';
 import Callback from './components/Callback';
 import Main from './components/Main';
+import About from './components/About';
 import Header from './components/Header';
 import { useAuth0 } from '@auth0/auth0-react'
 function App() {
@@ -15,11 +16,11 @@ function App() {
         <Router>
         <Switch>
           <Route exact path="/">
-              <Main message="Welcome to Bon HAketit 2.0" showbutton="true"/>
+              <Main />
           </Route>
-          {/* <Route exact path="/about">
-              <Main message="Thank you for visiting us" showbutton="false"/>
-          </Route> */}
+          <Route exact path="/about">
+              <About />
+          </Route>
           <Route exact path="/callback">
               <Callback />
           </Route>

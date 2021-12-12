@@ -24,7 +24,7 @@ const Header = (props) => {
               <a className="nav-link" href="/about">About</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="/">Let's Start</a>
+              <a className="nav-link" { ... isAuthenticated ? {href: "/callback"} : {href: "/"}}>Let's Start</a>
             </li>
           </ul>
         </div>
