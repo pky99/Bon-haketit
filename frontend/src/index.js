@@ -14,7 +14,7 @@ ReactDOM.render(
     <Auth0Provider
     domain="dev-pxq50cak.us.auth0.com"
     clientId="TsO1adXayNDJpaRs4plZgEhJwAoLTrTt"
-    redirectUri= "http://localhost:3000/callback"
+    redirectUri= "http://localhost:3000"
     ><App />
     </Auth0Provider></BrowserRouter>,        
     document.getElementById("root")
