@@ -15,8 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers                 
+from todo import views  
+from ML import views as mlViews
+from django.views.decorators.csrf import csrf_exempt
+router = routers.DefaultRouter()                   
+router.register(r'todos', views.TodoView, 'todo') 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('auth0login.urls')),
+    path('api/', include(router.urls))  , 
+    path('getFood/',csrf_exempt(mlViews.getFood) )         
 ]
+                        
+
+ 

@@ -1,41 +1,67 @@
-import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
+import React, { Component } from "react"
 
-import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewCompleted: false,
+      activeItem: {
+        title: "",
+        description: "",
+        completed: false
+      },
+      todoList: []
+      };
+  }
 
-function App() {
-  return (<Router>
-    <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>Bon-Haketit 2.0</Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Sign up</Link>
-              </li>
-            </ul>
+    async componentDidMount() {
+      try {
+        const res = await fetch('http://localhost:8000/api/todos/');
+        const todoList = await res.json();
+        this.setState({
+          todoList
+        });
+      } catch (e) {
+        console.log(e);
+    }
+    }
+    renderItems = () => {
+      const { viewCompleted } = this.state;
+      const newItems = this.state.todoList.filter(
+        item => item.completed === viewCompleted
+      );
+      return newItems.map(item => (
+        <li 
+          key={item.id}
+          className="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <span 
+            className={`todo-title mr-2 ${
+              this.state.viewCompleted ? "completed-todo" : ""
+            }`}
+            title={item.description}
+            >
+              {item.title}
+            </span>
+        </li>
+      ));
+    };
+
+    render() {
+      return (
+        <main className="content">
+        <div className="row">
+          <div className="col-md-6 col-sm-10 mx-auto p-0">
+            <div className="card p-3">
+              <ul className="list-group list-group-flush">
+                {this.renderItems()}
+              </ul>
+            </div>
           </div>
         </div>
-      </nav>
-
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-          </Switch>
-        </div>
-      </div>
-    </div></Router>
-  );
-}
-
+      </main>
+      )
+    }
+  }
+  
 export default App;
