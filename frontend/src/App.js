@@ -1,67 +1,41 @@
-import React, { Component } from "react"
+import React from 'react';
+import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
+import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
+import Callback from './components/Callback';
+import Main from './components/Main';
+import About from './components/About';
+import Header from './components/Header';
+import { useAuth0 } from '@auth0/auth0-react'
+function App() {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  return (<Router>
+    <div className="App">
+        <Header />
+        <Router>
+        <Switch>
+          <Route exact path="/">
+              <Main />
+          </Route>
+          <Route exact path="/about">
+              <About />
+          </Route>
+          <Route exact path="/callback">
+              <Callback />
+          </Route>
+          <Route exact path="/notfound">
+              <Main message="404 Page Not Found" showbutton="false"/>
+          </Route>
+          {/* <Route exact path="/recipes">
+              <Recipe message="Welcome to recipes" showbutton="false"/>
+          </Route> */}
+          <Route exact path="/loginFailed">
+              <Main message="Login Failed. Try Again" showbutton="true"/>
+          </Route>
+        </Switch>
+        </Router>
+    </div></Router>
+  );
+}
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewCompleted: false,
-      activeItem: {
-        title: "",
-        description: "",
-        completed: false
-      },
-      todoList: []
-      };
-  }
-
-    async componentDidMount() {
-      try {
-        const res = await fetch('http://localhost:8000/api/todos/');
-        const todoList = await res.json();
-        this.setState({
-          todoList
-        });
-      } catch (e) {
-        console.log(e);
-    }
-    }
-    renderItems = () => {
-      const { viewCompleted } = this.state;
-      const newItems = this.state.todoList.filter(
-        item => item.completed === viewCompleted
-      );
-      return newItems.map(item => (
-        <li 
-          key={item.id}
-          className="list-group-item d-flex justify-content-between align-items-center"
-        >
-          <span 
-            className={`todo-title mr-2 ${
-              this.state.viewCompleted ? "completed-todo" : ""
-            }`}
-            title={item.description}
-            >
-              {item.title}
-            </span>
-        </li>
-      ));
-    };
-
-    render() {
-      return (
-        <main className="content">
-        <div className="row">
-          <div className="col-md-6 col-sm-10 mx-auto p-0">
-            <div className="card p-3">
-              <ul className="list-group list-group-flush">
-                {this.renderItems()}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
-      )
-    }
-  }
-  
 export default App;
