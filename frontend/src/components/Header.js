@@ -3,6 +3,7 @@ import App from '../App';
 import { useAuth0 } from '@auth0/auth0-react'
 import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
 import LoginButton from './LoginButton';
+import './../App.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 const Header = (props) => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -16,7 +17,7 @@ const Header = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button> */}
         {/* {!isAuthenticated && (<button onClick={() => <LoginButton />}>Log in</button>)} */}
-        {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
+        
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
@@ -28,6 +29,7 @@ const Header = (props) => {
             </li>
           </ul>
         </div>
+        {isAuthenticated && <button class="button-34" role="button" onClick={() => logout()}>Log out</button>}
         </div>
       </nav>
       </div></Router>
