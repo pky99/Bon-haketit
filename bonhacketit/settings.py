@@ -37,11 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
     'social_django',
-    'auth0login'
+    'auth0login',
+    'ML'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,6 +154,8 @@ AUTHENTICATION_BACKENDS = {
     'auth0login.auth0backend.Auth0',
     'django.contrib.auth.backends.ModelBackend'
 }
-
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
 LOGIN_URL = '/login/auth0'
 LOGIN_REDIRECT_URL = '/dashboard'
